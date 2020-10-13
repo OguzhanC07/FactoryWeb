@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30309.148
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FactoryWebAPI.Entities", "FactoryWebAPI.Entities\FactoryWebAPI.Entities.csproj", "{A9C78701-99F7-46CF-9D0E-2379E0223DDC}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A9C78701-99F7-46CF-9D0E-2379E0223DDC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A9C78701-99F7-46CF-9D0E-2379E0223DDC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A9C78701-99F7-46CF-9D0E-2379E0223DDC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A9C78701-99F7-46CF-9D0E-2379E0223DDC}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {4BAD76E2-8938-4C8B-A802-B239D30D442D}
+	EndGlobalSection
+EndGlobal
