@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30309.148
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FactoryWebAPI.Entities", "FactoryWebAPI.Entities\FactoryWebAPI.Entities.csproj", "{A9C78701-99F7-46CF-9D0E-2379E0223DDC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FactoryWebAPI.Entities", "FactoryWebAPI.Entities\FactoryWebAPI.Entities.csproj", "{A9C78701-99F7-46CF-9D0E-2379E0223DDC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FactoryWebAPI.DataAccess", "FactoryWebAPI.DataAccess\FactoryWebAPI.DataAccess.csproj", "{62C7D80B-4A9B-4C5C-84D0-A6CB82A699F7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{A9C78701-99F7-46CF-9D0E-2379E0223DDC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A9C78701-99F7-46CF-9D0E-2379E0223DDC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A9C78701-99F7-46CF-9D0E-2379E0223DDC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{62C7D80B-4A9B-4C5C-84D0-A6CB82A699F7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{62C7D80B-4A9B-4C5C-84D0-A6CB82A699F7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{62C7D80B-4A9B-4C5C-84D0-A6CB82A699F7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{62C7D80B-4A9B-4C5C-84D0-A6CB82A699F7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
