@@ -11,10 +11,9 @@ namespace FactoryWebAPI.Entities.Concrete
         public string Name { get; set; }
         public string Description { get; set; }
         public string ImagePath { get; set; }
+        public bool IsVisible { get; set; } = true;
 
 
-        public int? AppUserId { get; set; }
-        public AppUser AppUser { get; set; }
         public List<OrderDetail> OrderDetails { get; set; }
     }
 }

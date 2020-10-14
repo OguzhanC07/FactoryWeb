@@ -5,7 +5,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Concrete\EntityFrameworkCore\Mapping\" />
     <Folder Include="Concrete\EntityFrameworkCore\Repositories\" />
     <Folder Include="Interfaces\" />
   </ItemGroup>
