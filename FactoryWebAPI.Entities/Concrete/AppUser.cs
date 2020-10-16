@@ -15,7 +15,7 @@ namespace FactoryWebAPI.Entities.Concrete
         public string ImagePath { get; set; }
 
 
-        public Dealer Dealer { get; set; }
+        public List<Dealer> Dealers { get; set; }
         public List<AppUserRole> AppUserRoles { get; set; }
     }
 }

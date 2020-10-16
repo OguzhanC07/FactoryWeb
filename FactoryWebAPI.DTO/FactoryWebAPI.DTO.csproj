@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\FactoryWebAPI.Entities\FactoryWebAPI.Entities.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="DTOs\AppUserDtos\" />
+    <Folder Include="DTOs\AppRoleDtos\" />
+    <Folder Include="DTOs\DealerDtos\" />
+    <Folder Include="DTOs\OrderDetailDtos\" />
+  </ItemGroup>
+
+</Project>

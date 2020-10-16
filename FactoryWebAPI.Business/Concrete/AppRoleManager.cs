@@ -1,4 +1,5 @@
-﻿using FactoryWebAPI.DataAccess.Interfaces;
+﻿using FactoryWebAPI.Business.Interfaces;
+using FactoryWebAPI.DataAccess.Interfaces;
 using FactoryWebAPI.Entities.Concrete;
 using System;
 using System.Collections.Generic;
@@ -6,7 +7,7 @@ using System.Text;
 
 namespace FactoryWebAPI.Business.Concrete
 {
-    public class AppRoleManager : GenericManager<AppRole>
+    public class AppRoleManager : GenericManager<AppRole>,IAppRoleService
     {
         private readonly IGenericDal<AppRole> _genericDal;
         public AppRoleManager(IGenericDal<AppRole> genericDal) : base(genericDal)

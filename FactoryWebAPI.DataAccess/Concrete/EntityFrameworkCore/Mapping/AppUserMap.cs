@@ -25,7 +25,9 @@ namespace FactoryWebAPI.DataAccess.Concrete.EntityFrameworkCore.Mapping
             builder.Property(I => I.FullName).HasMaxLength(100);
             builder.Property(I => I.ImagePath);
 
-            builder.HasOne(I => I.Dealer).WithOne(I => I.AppUser).HasForeignKey<Dealer>(I => I.AppUserId);
+            //builder.HasOne(I => I.Dealer).WithOne(I => I.AppUser).HasForeignKey<Dealer>(I => I.AppUserId);
+
+            builder.HasMany(I => I.Dealers).WithOne(I => I.AppUser).HasForeignKey(I => I.AppUserId).OnDelete(DeleteBehavior.Cascade);
 
             builder.HasMany(I => I.AppUserRoles).WithOne(I => I.AppUser).HasForeignKey(I=>I.AppUserId).OnDelete(DeleteBehavior.Cascade);
         }
