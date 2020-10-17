@@ -5,6 +5,8 @@ using FactoryWebAPI.Entities.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -29,6 +31,18 @@ namespace FactoryWebAPI.DataAccess.Concrete.EntityFrameworkCore.Repositories
         {
             using var context = new FactoryDbContext();
             return await context.Set<T>().ToListAsync();
+        }
+
+        public async Task<List<T>> GetAllByFilter(Expression<Func<T, bool>> filter)
+        {
+            using var context = new FactoryDbContext();
+            return await context.Set<T>().Where(filter).ToListAsync();
+        }
+
+        public async Task<T> GetByFilter(Expression<Func<T, bool>> filter)
+        {
+            using var context = new FactoryDbContext();
+            return await context.Set<T>().FirstOrDefaultAsync(filter);
         }
 
         public async Task RemoveAsync(T entity)

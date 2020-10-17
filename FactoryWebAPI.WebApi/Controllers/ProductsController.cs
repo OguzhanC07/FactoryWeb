@@ -33,10 +33,8 @@ namespace FactoryWebAPI.WebApi.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetById(IFormFile file, int id)
+        public async Task<IActionResult> GetById(int id)
         {
-
-
             return Ok(_mapper.Map<ProductListDto>(await _productService.FindByIdAsync(id)));
         }
 
@@ -52,7 +50,7 @@ namespace FactoryWebAPI.WebApi.Controllers
                 await _productService.AddAsync(_mapper.Map<Product>(model));
                 return Created("", model);
             }
-            else if (uploadModel.UploadState ==Enums.UploadState.NotExist)
+            else if (uploadModel.UploadState == Enums.UploadState.NotExist)
             {
                 model.ImagePath = "default.jpg";
                 return Created("", model);
@@ -63,10 +61,55 @@ namespace FactoryWebAPI.WebApi.Controllers
             }
         }
 
-        //[HttpPut("{id}")]
-        //public async Task<IActionResult> Update([FromForm] ProductUpdateModel model)
-        //{
+        [HttpPut("{id}")]
+        public async Task<IActionResult> Update(int id, [FromForm] ProductUpdateModel model)
+        {
 
-        //}
+            if (id != model.Id)
+                return BadRequest("Yanlış değer girildi");
+
+            var uploadModel = await UploadFileAsync(model.Image, "image/jpeg");
+
+            if (uploadModel.UploadState == Enums.UploadState.Success)
+            {
+                var updatedProduct = await _productService.FindByIdAsync(id);
+                updatedProduct.Name = model.Name;
+                updatedProduct.Description = model.Description;
+                updatedProduct.ImagePath = uploadModel.NewName;
+
+                await _productService.UpdateAsync(updatedProduct);
+                return NoContent();
+            }
+            else if (uploadModel.UploadState == Enums.UploadState.NotExist)
+            {
+                var updatedProduct = await _productService.FindByIdAsync(id);
+                updatedProduct.Name = model.Name;
+                updatedProduct.Description = model.Description;
+
+                await _productService.UpdateAsync(updatedProduct);
+                return NoContent();
+            }
+            else
+            {
+                return BadRequest(uploadModel.ErrorMessage);
+            }
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteProduct(int id)
+        {
+            var deletedProduct =await _productService.FindByIdAsync(id);
+            if (deletedProduct!=null)
+            {
+                deletedProduct.IsVisible = false;
+                await _productService.UpdateAsync(deletedProduct);
+                return NoContent();
+            }
+            else
+            {
+                return NotFound("Girilen Id'ye ait ürün yoktur.");
+            }
+        }
+
     }
 }

@@ -6,6 +6,12 @@
 
   <ItemGroup>
     <ProjectReference Include="..\FactoryWebAPI.DataAccess\FactoryWebAPI.DataAccess.csproj" />
+    <ProjectReference Include="..\FactoryWebAPI.DTO\FactoryWebAPI.DTO.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="FluentValidation.AspNetCore" Version="9.2.0" />
+    <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.8.0" />
   </ItemGroup>
 
 </Project>
