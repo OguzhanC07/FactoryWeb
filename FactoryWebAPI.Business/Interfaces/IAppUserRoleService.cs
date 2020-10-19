@@ -5,7 +5,7 @@ using System.Text;
 
 namespace FactoryWebAPI.Business.Interfaces
 {
-    interface IAppUserRoleService : IGenericService<AppUserRole>
+    public interface IAppUserRoleService : IGenericService<AppUserRole>
     {
 
     }

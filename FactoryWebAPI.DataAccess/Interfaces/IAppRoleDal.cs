@@ -7,6 +7,5 @@ namespace FactoryWebAPI.DataAccess.Interfaces
 {
     public interface IAppRoleDal : IGenericDal<AppRole>
     {
-
     }
 }

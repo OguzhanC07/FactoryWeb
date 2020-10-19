@@ -2,12 +2,11 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace FactoryWebAPI.Business.Interfaces
 {
-    public interface IAppRoleService : IGenericService<AppRole>
+    public interface IJwtService
     {
-        Task<AppRole> FindByNameAsync(string name);
+        string GenerateJwt(AppUser appUser, List<AppRole> roles);
     }
 }

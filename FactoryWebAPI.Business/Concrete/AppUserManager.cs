@@ -21,9 +21,9 @@ namespace FactoryWebAPI.Business.Concrete
         }
 
 
-        public async Task<AppUser> FindByEmailandUserName(string email,string username)
+        public async Task<AppUser> FindByEmailorUserName(string value)
         {
-            return await _appUserDal.GetByFilter(I=>I.Email==email || I.UserName==username);
+            return await _appUserDal.GetByFilter(I=>I.Email==value || I.UserName==value);
         }
         public async Task<bool> CheckHashPassword(AppUserLoginDto appUser)
         {
@@ -31,10 +31,6 @@ namespace FactoryWebAPI.Business.Concrete
             return user.Password == appUser.Password;
         }
 
-        public Task<AppRole> GetRolesByUserName(string username)
-        {
-            throw new NotImplementedException();
-        }
 
         public string CreateHashPassword(string password)
         {
@@ -50,6 +46,11 @@ namespace FactoryWebAPI.Business.Concrete
             }
 
             return strBuilder.ToString();
+        }
+
+        public async Task<List<AppRole>> GetRolesByEmail(string email)
+        {
+            return await _appUserDal.GetRolesByEmail(email);
         }
     }
 }

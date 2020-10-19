@@ -4,6 +4,7 @@ using FactoryWebAPI.Entities.Concrete;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace FactoryWebAPI.Business.Concrete
 {
@@ -13,6 +14,11 @@ namespace FactoryWebAPI.Business.Concrete
         public AppRoleManager(IGenericDal<AppRole> genericDal) : base(genericDal)
         {
             _genericDal = genericDal;
+        }
+
+        public async Task<AppRole> FindByNameAsync(string name)
+        {
+            return await _genericDal.GetByFilter(I => I.Name == name);
         }
     }
 }

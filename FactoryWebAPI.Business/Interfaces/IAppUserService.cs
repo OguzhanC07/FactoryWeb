@@ -9,11 +9,11 @@ namespace FactoryWebAPI.Business.Interfaces
 {
     public interface IAppUserService : IGenericService<AppUser>
     {
-        Task<AppUser> FindByEmailandUserName(string email,string username);
+        Task<AppUser> FindByEmailorUserName(string value);
         string CreateHashPassword(string password);
         Task<bool> CheckHashPassword(AppUserLoginDto appUser);
-       
+
         //it can be changeable
-        Task<AppRole> GetRolesByUserName(string username);
+        Task<List<AppRole>> GetRolesByEmail(string email);
     }
 }
