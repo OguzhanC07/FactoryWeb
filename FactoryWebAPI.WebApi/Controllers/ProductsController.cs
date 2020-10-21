@@ -18,17 +18,19 @@ namespace FactoryWebAPI.WebApi.Controllers
     {
         private readonly IProductService _productService;
         private readonly IMapper _mapper;
+        private readonly IMailService _mailService;
 
-        public ProductsController(IMapper mapper, IProductService productService)
+        public ProductsController(IMapper mapper,IMailService mailService, IProductService productService)
         {
             _productService = productService;
             _mapper = mapper;
+            _mailService = mailService;
         }
 
 
         [HttpGet]
         public async Task<IActionResult> GetAll()
-        {
+        {            
             return Ok(_mapper.Map<List<ProductListDto>>(await _productService.GetAllAsync()));
         }
 

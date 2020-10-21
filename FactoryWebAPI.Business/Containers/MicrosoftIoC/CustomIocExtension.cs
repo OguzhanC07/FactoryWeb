@@ -1,7 +1,11 @@
 ﻿using FactoryWebAPI.Business.Concrete;
 using FactoryWebAPI.Business.Interfaces;
+using FactoryWebAPI.Business.Settings;
+using FactoryWebAPI.Business.ValidationRules.FluentValidation;
 using FactoryWebAPI.DataAccess.Concrete.EntityFrameworkCore.Repositories;
 using FactoryWebAPI.DataAccess.Interfaces;
+using FactoryWebAPI.DTO.DTOs.AppUserDtos;
+using FluentValidation;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
@@ -34,7 +38,12 @@ namespace FactoryWebAPI.Business.Containers.MicrosoftIoC
             services.AddScoped<IProductDal, EfProductRepository>();
             services.AddScoped<IProductService, ProductManager>();
 
+            services.AddScoped<IJwtService, JwtManager>();
 
+            services.AddTransient<IMailService, MailManager>();
+
+            services.AddTransient<IValidator<AppUserLoginDto>, AppUserLoginDtoValidator>();
+            services.AddTransient<IValidator<AppUserAddDto>, AppUserAddDtoValidator>();
 
         }
     }

@@ -17,6 +17,7 @@ using Microsoft.IdentityModel.Tokens;
 using FactoryWebAPI.Business.StringInfo.cs;
 using System.Text;
 using FactoryWebAPI.Business.Interfaces;
+using FactoryWebAPI.Business.Settings;
 
 namespace FactoryWebAPI.WebApi
 {
@@ -34,6 +35,7 @@ namespace FactoryWebAPI.WebApi
         {
             services.AddDependicies();
             services.AddAutoMapper(typeof(Startup));
+            services.Configure<MailSettings>(Configuration.GetSection("MailSettings"));
 
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(opt =>
             {

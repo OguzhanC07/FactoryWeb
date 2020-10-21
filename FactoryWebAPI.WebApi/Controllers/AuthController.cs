@@ -8,6 +8,7 @@ using FactoryWebAPI.Business.StringInfo.cs;
 using FactoryWebAPI.DTO.DTOs.AppUserDtos;
 using FactoryWebAPI.Entities.Concrete;
 using FactoryWebAPI.WebApi.CustomFilters;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -20,11 +21,13 @@ namespace FactoryWebAPI.WebApi.Controllers
         private readonly IAppUserService _appUserService;
         private readonly IMapper _mapper;
         private readonly IJwtService _jwtService;
-        public AuthController(IJwtService jwtService, IMapper mapper, IAppUserService appUserService)
+        private readonly IMailService _mailService;
+        public AuthController(IMailService mailService,IJwtService jwtService, IMapper mapper, IAppUserService appUserService)
         {
             _appUserService = appUserService;
             _mapper = mapper;
             _jwtService = jwtService;
+            _mailService = mailService;
         }
 
 
@@ -60,6 +63,7 @@ namespace FactoryWebAPI.WebApi.Controllers
             }
 
             appUserAddDto.Password = _appUserService.CreateHashPassword(appUserAddDto.Password);
+            appUserAddDto.ImagePath = "default.jpg";
             await _appUserService.AddAsync(_mapper.Map<AppUser>(appUserAddDto));
 
             var user = await _appUserService.FindByEmailorUserName(appUserAddDto.UserName);
@@ -71,7 +75,26 @@ namespace FactoryWebAPI.WebApi.Controllers
                 AppUserId = user.Id
             });
 
+            await _mailService.SendWelcomeMailAsync(user.UserName,user.Email);
             return Created("", appUserAddDto);
+        }
+
+
+        [HttpGet("[action]")]
+        [Authorize(Roles ="Admin,Member")]
+        public async Task<IActionResult> GetActiveUser()
+        {
+            var user = await _appUserService.FindByEmailorUserName(User.Identity.Name);
+            var roles = await _appUserService.GetRolesByEmail(user.Email);
+
+            AppUserDto appUserDto = new AppUserDto
+            {
+                FullName = user.FullName,
+                UserName = user.UserName,
+                Roles = roles.Select(I => I.Name).ToList()
+            };
+
+            return Ok(appUserDto);
         }
 
 

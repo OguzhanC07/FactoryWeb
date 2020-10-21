@@ -1,7 +1,9 @@
 ﻿using FactoryWebAPI.Business.Interfaces;
 using FactoryWebAPI.DataAccess.Interfaces;
+using FactoryWebAPI.DTO.DTOs;
 using FactoryWebAPI.DTO.DTOs.AppUserDtos;
 using FactoryWebAPI.Entities.Concrete;
+using MimeKit;
 using System;
 using System.Collections.Generic;
 using System.Security.Cryptography;
@@ -27,10 +29,9 @@ namespace FactoryWebAPI.Business.Concrete
         }
         public async Task<bool> CheckHashPassword(AppUserLoginDto appUser)
         {
-            var user =await _appUserDal.GetByFilter(I => I.Email == appUser.Email && I.Password == appUser.Password);
+            var user =await _appUserDal.GetByFilter(I => I.Email == appUser.Email || I.UserName==appUser.Email && I.Password == appUser.Password);
             return user.Password == appUser.Password;
         }
-
 
         public string CreateHashPassword(string password)
         {
