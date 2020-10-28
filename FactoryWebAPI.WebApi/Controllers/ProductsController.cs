@@ -6,7 +6,9 @@ using AutoMapper;
 using FactoryWebAPI.Business.Interfaces;
 using FactoryWebAPI.DTO.DTOs.ProductDtos;
 using FactoryWebAPI.Entities.Concrete;
+using FactoryWebAPI.WebApi.CustomFilters;
 using FactoryWebAPI.WebApi.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -18,13 +20,11 @@ namespace FactoryWebAPI.WebApi.Controllers
     {
         private readonly IProductService _productService;
         private readonly IMapper _mapper;
-        private readonly IMailService _mailService;
 
-        public ProductsController(IMapper mapper,IMailService mailService, IProductService productService)
+        public ProductsController(IMapper mapper, IProductService productService)
         {
             _productService = productService;
             _mapper = mapper;
-            _mailService = mailService;
         }
 
 
@@ -42,6 +42,8 @@ namespace FactoryWebAPI.WebApi.Controllers
 
 
         [HttpPost]
+        [Authorize(Roles = "Admin")]
+        [ValidModel]
         public async Task<IActionResult> Add([FromForm] ProductAddModel model)
         {
 
@@ -55,6 +57,7 @@ namespace FactoryWebAPI.WebApi.Controllers
             else if (uploadModel.UploadState == Enums.UploadState.NotExist)
             {
                 model.ImagePath = "default.jpg";
+                await _productService.AddAsync(_mapper.Map<Product>(model));
                 return Created("", model);
             }
             else
@@ -64,6 +67,8 @@ namespace FactoryWebAPI.WebApi.Controllers
         }
 
         [HttpPut("{id}")]
+        [Authorize(Roles = "Admin")]
+        [ValidModel]
         public async Task<IActionResult> Update(int id, [FromForm] ProductUpdateModel model)
         {
 
@@ -98,6 +103,8 @@ namespace FactoryWebAPI.WebApi.Controllers
         }
 
         [HttpDelete("{id}")]
+        [Authorize(Roles = "Admin")]
+        [ValidModel]
         public async Task<IActionResult> DeleteProduct(int id)
         {
             var deletedProduct =await _productService.FindByIdAsync(id);

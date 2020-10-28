@@ -1,4 +1,5 @@
 ﻿using FactoryWebAPI.Business.Interfaces;
+using FactoryWebAPI.Business.Settings;
 using FactoryWebAPI.Business.StringInfo.cs;
 using FactoryWebAPI.Entities.Concrete;
 using Microsoft.IdentityModel.Tokens;
@@ -13,16 +14,17 @@ namespace FactoryWebAPI.Business.Concrete
     public class JwtManager : IJwtService
     {
 
-        public string GenerateJwt(AppUser appUser, List<AppRole> roles)
+        public JwtToken GenerateJwt(AppUser appUser, List<AppRole> roles)
         {
             SymmetricSecurityKey key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(JwtInfo.SecurityKey));
             SigningCredentials credentials = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
             JwtSecurityToken jwtSecurityToken = new JwtSecurityToken(issuer: JwtInfo.Issuer, audience: JwtInfo.Audience, claims: GetClaims(appUser, roles), notBefore: DateTime.Now, expires: DateTime.Now.AddMinutes(JwtInfo.TokenExpiration), signingCredentials: credentials);
 
+            JwtToken jwtToken = new JwtToken();
             JwtSecurityTokenHandler handler = new JwtSecurityTokenHandler();
-            return handler.WriteToken(jwtSecurityToken);
+            jwtToken.Token=handler.WriteToken(jwtSecurityToken);
 
-
+            return jwtToken;
         }
 
 

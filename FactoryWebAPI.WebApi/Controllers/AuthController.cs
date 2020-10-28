@@ -54,7 +54,7 @@ namespace FactoryWebAPI.WebApi.Controllers
 
         [HttpPost("[action]")]
         [ValidModel]
-        public async Task<IActionResult> SignUp(AppUserAddDto appUserAddDto, [FromServices] IAppUserRoleService appUserRoleService, [FromServices] IAppRoleService appRoleService)
+        public async Task<IActionResult> SignUp([FromForm]AppUserAddDto appUserAddDto, [FromServices] IAppUserRoleService appUserRoleService, [FromServices] IAppRoleService appRoleService)
         {
             var appUser = await _appUserService.FindByEmailorUserName(appUserAddDto.Email);
             if (appUser != null)

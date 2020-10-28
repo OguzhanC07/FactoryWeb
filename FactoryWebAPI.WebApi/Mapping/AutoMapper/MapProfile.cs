@@ -2,6 +2,7 @@
 using FactoryWebAPI.DTO.DTOs.AppUserDtos;
 using FactoryWebAPI.DTO.DTOs.ProductDtos;
 using FactoryWebAPI.Entities.Concrete;
+using FactoryWebAPI.WebApi.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,6 +17,12 @@ namespace FactoryWebAPI.WebApi.Mapping.AutoMapper
             #region Product
             CreateMap<ProductListDto, Product>();
             CreateMap<Product, ProductListDto>();
+
+            CreateMap<Product, ProductAddModel>();
+            CreateMap<ProductAddModel, Product>();
+
+            CreateMap<Product, ProductUpdateModel>();
+            CreateMap<ProductUpdateModel, Product>();
             #endregion
 
 
