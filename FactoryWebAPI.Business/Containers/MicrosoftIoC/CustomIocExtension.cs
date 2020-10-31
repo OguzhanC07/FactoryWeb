@@ -5,6 +5,7 @@ using FactoryWebAPI.Business.ValidationRules.FluentValidation;
 using FactoryWebAPI.DataAccess.Concrete.EntityFrameworkCore.Repositories;
 using FactoryWebAPI.DataAccess.Interfaces;
 using FactoryWebAPI.DTO.DTOs.AppUserDtos;
+using FactoryWebAPI.DTO.DTOs.DealerDtos;
 using FluentValidation;
 using Microsoft.Extensions.DependencyInjection;
 using System;
@@ -44,6 +45,8 @@ namespace FactoryWebAPI.Business.Containers.MicrosoftIoC
 
             services.AddTransient<IValidator<AppUserLoginDto>, AppUserLoginDtoValidator>();
             services.AddTransient<IValidator<AppUserAddDto>, AppUserAddDtoValidator>();
+            services.AddTransient<IValidator<DealerAddDto>, DealerAddDtoValidator>();
+            services.AddTransient<IValidator<DealerUpdateDto>, DealerUpdateDtoValidator>();
 
         }
     }

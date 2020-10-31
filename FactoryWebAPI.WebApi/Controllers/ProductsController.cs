@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using AutoMapper;
 using FactoryWebAPI.Business.Interfaces;
@@ -9,7 +7,6 @@ using FactoryWebAPI.Entities.Concrete;
 using FactoryWebAPI.WebApi.CustomFilters;
 using FactoryWebAPI.WebApi.Models;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FactoryWebAPI.WebApi.Controllers
@@ -71,7 +68,6 @@ namespace FactoryWebAPI.WebApi.Controllers
         [ValidModel]
         public async Task<IActionResult> Update(int id, [FromForm] ProductUpdateModel model)
         {
-
             if (id != model.Id)
                 return BadRequest("Yanlış değer girildi");
 

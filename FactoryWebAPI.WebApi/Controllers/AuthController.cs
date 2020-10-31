@@ -89,6 +89,7 @@ namespace FactoryWebAPI.WebApi.Controllers
 
             AppUserDto appUserDto = new AppUserDto
             {
+                Id = user.Id,
                 FullName = user.FullName,
                 UserName = user.UserName,
                 Roles = roles.Select(I => I.Name).ToList()
