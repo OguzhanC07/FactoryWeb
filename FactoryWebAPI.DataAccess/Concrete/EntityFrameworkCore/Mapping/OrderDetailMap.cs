@@ -16,8 +16,6 @@ namespace FactoryWebAPI.DataAccess.Concrete.EntityFrameworkCore.Mapping
 
             builder.Property(I => I.NumberOfOrders);
 
-
-            builder.HasIndex(I => new { I.ProductId, I.DealerId }).IsUnique();
         }
     }
 }

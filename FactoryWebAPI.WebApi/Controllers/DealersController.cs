@@ -94,7 +94,6 @@ namespace FactoryWebAPI.WebApi.Controllers
             {
                 return NotFound("Girilen id'ye ait dealer bulunamadı.");
             }
-        
         }
 
     }

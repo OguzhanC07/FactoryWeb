@@ -1,4 +1,5 @@
 ﻿using FactoryWebAPI.Business.Interfaces;
+using FactoryWebAPI.DataAccess.Concrete.EntityFrameworkCore.Repositories;
 using FactoryWebAPI.DataAccess.Interfaces;
 using FactoryWebAPI.Entities.Concrete;
 using System;
@@ -21,6 +22,11 @@ namespace FactoryWebAPI.Business.Concrete
         public new async Task<List<Dealer>> GetAllAsync()
         {
             return await _dealerDal.GetAllByFilter(I => I.IsVisible == true);
+        }
+
+        public async Task<List<OrderDetail>> GetAllOrders()
+        {
+            return await _dealerDal.GetAllOrders();
         }
 
         public async Task<List<Dealer>> GetDealersByAppUserId(int appUserId)

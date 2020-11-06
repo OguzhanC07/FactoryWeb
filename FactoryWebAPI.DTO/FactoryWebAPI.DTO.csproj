@@ -10,7 +10,6 @@
 
   <ItemGroup>
     <Folder Include="DTOs\AppRoleDtos\" />
-    <Folder Include="DTOs\OrderDetailDtos\" />
   </ItemGroup>
 
 </Project>

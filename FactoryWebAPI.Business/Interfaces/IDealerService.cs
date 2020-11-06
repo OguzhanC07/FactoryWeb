@@ -9,5 +9,6 @@ namespace FactoryWebAPI.Business.Interfaces
     public interface IDealerService : IGenericService<Dealer>
     {
         Task<List<Dealer>> GetDealersByAppUserId(int appUserId);
+        Task<List<OrderDetail>> GetAllOrders();
     }
 }

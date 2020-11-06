@@ -8,5 +8,6 @@ namespace FactoryWebAPI.DataAccess.Concrete.EntityFrameworkCore.Repositories
 {
     public class EfOrderDetailRepository : EfGenericRepository<OrderDetail>,IOrderDetailDal
     {
+       
     }
 }

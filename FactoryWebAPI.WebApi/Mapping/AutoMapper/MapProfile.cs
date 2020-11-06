@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using FactoryWebAPI.DTO.DTOs.AppUserDtos;
 using FactoryWebAPI.DTO.DTOs.DealerDtos;
+using FactoryWebAPI.DTO.DTOs.OrderDetailDtos;
 using FactoryWebAPI.DTO.DTOs.ProductDtos;
 using FactoryWebAPI.Entities.Concrete;
 using FactoryWebAPI.WebApi.Models;
@@ -44,6 +45,14 @@ namespace FactoryWebAPI.WebApi.Mapping.AutoMapper
 
             CreateMap<Dealer, DealerUpdateDto>();
             CreateMap<DealerUpdateDto, Dealer>();
+            #endregion
+
+            #region OrderDetail
+            CreateMap<OrderDetail, OrderDetailListDto>();
+            CreateMap<OrderDetailListDto, OrderDetail>();
+
+            CreateMap<OrderDetail, OrderAddDto>();
+            CreateMap<OrderAddDto, OrderDetail>();
             #endregion
         }
     }
