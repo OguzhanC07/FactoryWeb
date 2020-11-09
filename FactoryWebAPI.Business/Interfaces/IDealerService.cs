@@ -10,5 +10,6 @@ namespace FactoryWebAPI.Business.Interfaces
     {
         Task<List<Dealer>> GetDealersByAppUserId(int appUserId);
         Task<List<OrderDetail>> GetAllOrders();
+        Task<List<OrderDetail>> GetOrdersByAppUserIdAsync(int appUserId);
     }
 }

@@ -53,6 +53,31 @@ namespace FactoryWebAPI.WebApi.Controllers
             return Ok(orderDetailsList);
         }
 
+        [HttpGet("{id}")]
+        [Authorize(Roles ="Admin,Member")]
+        public async Task<IActionResult> GetAllOrdersByAppUserId(int id)
+        {
+            var orders = await _dealerService.GetOrdersByAppUserIdAsync(id);
+
+            List<OrderDetailListDto> orderDetailList = new List<OrderDetailListDto>();
+
+            foreach (var order in orders)
+            {
+                OrderDetailListDto orderDetail = new OrderDetailListDto
+                {
+                    Id = order.Id,
+                    BuyTime=order.BuyTime,
+                    DealerName=order.Dealer.Name,
+                    NumberOfOrders=order.NumberOfOrders,
+                    ProductName=order.Product.Name
+                };
+
+                orderDetailList.Add(orderDetail);
+            }
+
+            return Ok(orderDetailList);
+        }
+
         [HttpPost]
         [Authorize(Roles ="Admin,Member")]
         public async Task<IActionResult> AddNewOrder([FromForm] OrderAddDto orderAdd)

@@ -33,6 +33,10 @@ namespace FactoryWebAPI.Business.Concrete
         {
             return await _dealerDal.GetAllByFilter(I => I.AppUserId == appUserId && I.IsVisible==true);
         }
-       
+
+        public async Task<List<OrderDetail>> GetOrdersByAppUserIdAsync(int appUserId)
+        {
+            return await _dealerDal.GetOrdersByAppUserIdAsync(appUserId);
+        }
     }
 }

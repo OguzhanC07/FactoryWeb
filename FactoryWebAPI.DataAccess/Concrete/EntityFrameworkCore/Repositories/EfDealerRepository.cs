@@ -24,7 +24,7 @@ namespace FactoryWebAPI.DataAccess.Concrete.EntityFrameworkCore.Repositories
                 dealer = twotable.dealer,
                 order = twotable.order,
                 product = prodct
-            }).Select(I => new OrderDetail
+            }).OrderByDescending(I=>I.order.BuyTime).Select(I => new OrderDetail
             {
                 Dealer=I.dealer,
                 Product=I.product,
@@ -32,13 +32,28 @@ namespace FactoryWebAPI.DataAccess.Concrete.EntityFrameworkCore.Repositories
                 NumberOfOrders = I.order.NumberOfOrders,
             }).ToListAsync();
         }
-    }
 
-    public class OrderInformations
-    {
-        public string ProductName { get; set; }
-        public string DealerName { get; set; }
-        public int NumberOfOrders { get; set; }
-        public DateTime BuyTime { get; set; }
+
+        public async Task<List<OrderDetail>> GetOrdersByAppUserIdAsync(int appUserId)
+        {
+            using var context = new FactoryDbContext();
+
+            return await context.Dealers.Join(context.OrderDetails, d => d.Id, od => od.DealerId, (dealer, order) => new
+            {
+                dealer,
+                order
+            }).Join(context.Products, two => two.order.ProductId, p => p.Id, (twotable, product) => new
+            {
+                dealer = twotable.dealer,
+                order = twotable.order,
+                product = product
+            }).Where(I => I.dealer.AppUserId == appUserId).OrderByDescending(I => I.order.BuyTime).Select(I => new OrderDetail
+            {
+                Dealer = I.dealer,
+                Product = I.product,
+                BuyTime = I.order.BuyTime,
+                NumberOfOrders = I.order.NumberOfOrders
+            }).ToListAsync();
+        }
     }
 }
