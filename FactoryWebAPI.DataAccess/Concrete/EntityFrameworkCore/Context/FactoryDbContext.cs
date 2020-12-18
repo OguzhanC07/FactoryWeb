@@ -11,7 +11,7 @@ namespace FactoryWebAPI.DataAccess.Concrete.EntityFrameworkCore.Context
     {
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer("Server=DESKTOP-FG912SU\\SQLEXPRESS; Database=FactoryDb;uid=sa;pwd=1234;");
+            optionsBuilder.UseSqlServer("Server=DESKTOP-39PR7AQ; Database=FactoryDb;uid=sa;pwd=1234;");
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
