@@ -9,5 +9,6 @@ namespace FactoryWebAPI.Business.Interfaces
     {
         //Task SendEmailAsync(string toemail, string subject, string body);
         Task SendWelcomeMailAsync(string username,string toemail);
+        Task SendForgotPasswordCodeAsync(string code, string toemail);
     }
 }

@@ -39,6 +39,9 @@ namespace FactoryWebAPI.Business.Containers.MicrosoftIoC
             services.AddScoped<IProductDal, EfProductRepository>();
             services.AddScoped<IProductService, ProductManager>();
 
+            services.AddScoped<IForgotPasswordDal, EfForgotPasswordRepository>();
+            services.AddScoped<IForgotPasswordService, ForgotPasswordManager>();
+
             services.AddScoped<IJwtService, JwtManager>();
 
             services.AddTransient<IMailService, MailManager>();

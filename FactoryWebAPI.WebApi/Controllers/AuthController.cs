@@ -6,6 +6,7 @@ using AutoMapper;
 using FactoryWebAPI.Business.Interfaces;
 using FactoryWebAPI.Business.StringInfo.cs;
 using FactoryWebAPI.DTO.DTOs.AppUserDtos;
+using FactoryWebAPI.DTO.DTOs.ForgotPasswordDtos;
 using FactoryWebAPI.Entities.Concrete;
 using FactoryWebAPI.WebApi.CustomFilters;
 using Microsoft.AspNetCore.Authorization;
@@ -22,12 +23,14 @@ namespace FactoryWebAPI.WebApi.Controllers
         private readonly IMapper _mapper;
         private readonly IJwtService _jwtService;
         private readonly IMailService _mailService;
-        public AuthController(IMailService mailService,IJwtService jwtService, IMapper mapper, IAppUserService appUserService)
+        private readonly IForgotPasswordService _forgotPasswordService;
+        public AuthController(IForgotPasswordService forgotPasswordService, IMailService mailService, IJwtService jwtService, IMapper mapper, IAppUserService appUserService)
         {
             _appUserService = appUserService;
             _mapper = mapper;
             _jwtService = jwtService;
             _mailService = mailService;
+            _forgotPasswordService = forgotPasswordService;
         }
 
 
@@ -54,7 +57,7 @@ namespace FactoryWebAPI.WebApi.Controllers
 
         [HttpPost("[action]")]
         [ValidModel]
-        public async Task<IActionResult> SignUp([FromForm]AppUserAddDto appUserAddDto, [FromServices] IAppUserRoleService appUserRoleService, [FromServices] IAppRoleService appRoleService)
+        public async Task<IActionResult> SignUp([FromForm] AppUserAddDto appUserAddDto, [FromServices] IAppUserRoleService appUserRoleService, [FromServices] IAppRoleService appRoleService)
         {
             var appUser = await _appUserService.FindByEmailorUserName(appUserAddDto.Email);
             if (appUser != null)
@@ -75,13 +78,13 @@ namespace FactoryWebAPI.WebApi.Controllers
                 AppUserId = user.Id
             });
 
-            await _mailService.SendWelcomeMailAsync(user.UserName,user.Email);
+            await _mailService.SendWelcomeMailAsync(user.UserName, user.Email);
             return Created("", appUserAddDto);
         }
 
 
         [HttpGet("[action]")]
-        [Authorize(Roles ="Admin,Member")]
+        [Authorize(Roles = "Admin,Member")]
         public async Task<IActionResult> GetActiveUser()
         {
             var user = await _appUserService.FindByEmailorUserName(User.Identity.Name);
@@ -98,6 +101,45 @@ namespace FactoryWebAPI.WebApi.Controllers
             return Ok(appUserDto);
         }
 
+
+        [HttpPost("[action]")]
+        public async Task<IActionResult> ForgotPassword([FromForm]string email)
+        {
+            var user = await _appUserService.FindByEmailorUserName(email);
+            if (user!=null)
+            {
+                string code = _forgotPasswordService.GenerateRandomPass();
+                await _forgotPasswordService.MakeAllCodesFalseAsync(user.Id);
+                await _forgotPasswordService.AddAsync(new ForgotPassword
+                {
+                    AppUserId = user.Id,
+                    Code =code,
+                    isActive = true
+                });
+                await _mailService.SendForgotPasswordCodeAsync(code, email);
+                return Ok();
+            }
+            else
+            {
+                return NotFound("Böyle bir kullanıcı bulunmamaktadır");
+            }
+        }
+
+        [HttpPost("[action]")]
+        public async Task<IActionResult> ResetPassword([FromForm]ForgotPasswordDto forgotPassDto)
+        {
+            var user = await _appUserService.FindByEmailorUserName(forgotPassDto.Email);
+            if (await _forgotPasswordService.GetCodeAsync(user.Id,forgotPassDto.Code))
+            {
+                user.Password = _appUserService.CreateHashPassword(forgotPassDto.Password);
+                await _appUserService.UpdateAsync(user);
+                return Ok(); 
+            }
+            else
+            {
+                return BadRequest("Kodu yanlış girdiniz");
+            }
+        }
 
     }
 }

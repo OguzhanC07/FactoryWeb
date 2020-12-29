@@ -17,5 +17,6 @@ namespace FactoryWebAPI.Entities.Concrete
 
         public List<Dealer> Dealers { get; set; }
         public List<AppUserRole> AppUserRoles { get; set; }
+        public List<ForgotPassword> AppUserForgotPasswords { get; set; }
     }
 }

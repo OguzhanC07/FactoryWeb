@@ -11,7 +11,7 @@ namespace FactoryWebAPI.DataAccess.Concrete.EntityFrameworkCore.Context
     {
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer("Server=DESKTOP-FG912SU\\SQLEXPRESS; Database=FactoryDb;uid=sa;pwd=1234;");
+            optionsBuilder.UseSqlServer("Server=DESKTOP-NDB2B06\\SQLEXPRESS; Database=FactoryDb;uid=sa;pwd=1234;");
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -21,6 +21,7 @@ namespace FactoryWebAPI.DataAccess.Concrete.EntityFrameworkCore.Context
             modelBuilder.ApplyConfiguration(new DealerMap());
             modelBuilder.ApplyConfiguration(new OrderDetailMap());
             modelBuilder.ApplyConfiguration(new ProductMap());
+            modelBuilder.ApplyConfiguration(new ForgotPasswordMap());
 
         }
 
@@ -30,5 +31,6 @@ namespace FactoryWebAPI.DataAccess.Concrete.EntityFrameworkCore.Context
         public DbSet<Product> Products { get; set; }
         public DbSet<Dealer> Dealers { get; set; }
         public DbSet<OrderDetail> OrderDetails { get; set; }
+        public DbSet<ForgotPassword> ForgotPasswords { get; set; }
     }
 }

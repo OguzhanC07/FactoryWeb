@@ -30,6 +30,8 @@ namespace FactoryWebAPI.DataAccess.Concrete.EntityFrameworkCore.Mapping
             builder.HasMany(I => I.Dealers).WithOne(I => I.AppUser).HasForeignKey(I => I.AppUserId).OnDelete(DeleteBehavior.Cascade);
 
             builder.HasMany(I => I.AppUserRoles).WithOne(I => I.AppUser).HasForeignKey(I=>I.AppUserId).OnDelete(DeleteBehavior.Cascade);
+
+            builder.HasMany(I => I.AppUserForgotPasswords).WithOne(I => I.AppUser).HasForeignKey(I => I.AppUserId).OnDelete(DeleteBehavior.Cascade);
         }
     }
 }
