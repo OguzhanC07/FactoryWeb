@@ -13,9 +13,11 @@ namespace FactoryWebAPI.WebApi.Controllers
     public class FilesController : ControllerBase
     {
         private readonly IProductService _productService;
-        public FilesController(IProductService productService)
+        private readonly IAppUserService _appUserService;
+        public FilesController(IProductService productService, IAppUserService appUserService)
         {
             _productService = productService;
+            _appUserService = appUserService;
         }
 
         [HttpGet("[action]/{id}")]
@@ -28,7 +30,32 @@ namespace FactoryWebAPI.WebApi.Controllers
             }
             else
             {
-                return File($"/img/{product.ImagePath}", "image/jpeg");
+                string type = "image/jpeg";
+                if (product.ImagePath.Contains(".png"))
+                {
+                    type = "image/png";
+                }
+                return File($"/img/{product.ImagePath}", type);
+            }
+        }
+        
+        [HttpGet("[action]/{id}")]
+        public async Task<IActionResult> GetProfileImage(int id)
+        {
+            var user =await _appUserService.FindByIdAsync(id);
+
+            if (string.IsNullOrWhiteSpace(user.ImagePath))
+            {
+                return NotFound();
+            }
+            else
+            {
+                string type = "image/jpeg";
+                if (user.ImagePath.Contains(".png"))
+                {
+                    type = "image/png";
+                }
+                return File($"/profile/{user.ImagePath}", type);
             }
         }
     }

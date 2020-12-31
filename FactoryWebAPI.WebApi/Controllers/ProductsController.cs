@@ -43,8 +43,7 @@ namespace FactoryWebAPI.WebApi.Controllers
         [ValidModel]
         public async Task<IActionResult> Add([FromForm] ProductAddModel model)
         {
-
-            var uploadModel = await UploadFileAsync(model.Image, "image/jpeg");
+            var uploadModel = await UploadFileAsync(model.Image,"img");
             if (uploadModel.UploadState == Enums.UploadState.Success)
             {
                 model.ImagePath = uploadModel.NewName;
@@ -71,7 +70,7 @@ namespace FactoryWebAPI.WebApi.Controllers
             if (id != model.Id)
                 return BadRequest("Yanlış değer girildi");
 
-            var uploadModel = await UploadFileAsync(model.Image, "image/jpeg");
+            var uploadModel = await UploadFileAsync(model.Image, "img");
 
             if (uploadModel.UploadState == Enums.UploadState.Success)
             {
