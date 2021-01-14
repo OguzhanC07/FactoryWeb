@@ -68,6 +68,8 @@ namespace FactoryWebAPI.WebApi.Controllers
             {
                 updatedDealer.Name = dealerUpdateDto.Name;
                 updatedDealer.Address = dealerUpdateDto.Address;
+                updatedDealer.PhoneNumber = dealerUpdateDto.PhoneNumber;
+                updatedDealer.Email = dealerUpdateDto.Email;
 
                 await _dealerService.UpdateAsync(updatedDealer);
                 return NoContent();

@@ -19,6 +19,11 @@ namespace FactoryWebAPI.DataAccess.Concrete.EntityFrameworkCore.Mapping
 
             builder.Property(I => I.Address).HasColumnType("ntext").HasMaxLength(200);
 
+            builder.Property(I => I.Email).HasMaxLength(60);
+
+            builder.Property(I => I.PhoneNumber).HasMaxLength(10);
+
+
             builder.HasMany(I => I.OrderDetails).WithOne(I => I.Dealer).HasForeignKey(I => I.DealerId);
         }
     }

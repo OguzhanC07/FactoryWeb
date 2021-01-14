@@ -42,7 +42,7 @@ namespace FactoryWebAPI.WebApi.Controllers
             if (user != null)
             {
                 appUserLoginDto.Password = _appUserService.CreateHashPassword(appUserLoginDto.Password);
-                if (await _appUserService.CheckHashPassword(appUserLoginDto))
+                if (await _appUserService.CheckHashPassword(appUserLoginDto) && user.BanEndTime<=DateTime.Now)
                 {
                     var roles = await _appUserService.GetRolesByEmail(appUserLoginDto.Email);
                     var token = _jwtService.GenerateJwt(user, roles);
@@ -50,7 +50,25 @@ namespace FactoryWebAPI.WebApi.Controllers
                     return Created("", token);
                 }
                 else
-                    return BadRequest("Kullanıcı adı veya şifre hatalıdır.");
+                {
+                    if (user.BanCount>=3)
+                    {
+                        user.BanCount = 0;
+                        user.BanEndTime = DateTime.Now.AddMinutes(60);
+                        await _appUserService.UpdateAsync(user);
+                        return BadRequest($"Çok fazla giriş yapmaya çalıştınız.{user.BanEndTime.ToLongDateString()}-{user.BanEndTime.ToLongTimeString()}'e kadar giriş yapamazsınız");
+                    }
+                    else
+                    {
+                        if (user.BanEndTime>=DateTime.Now)
+                        {
+                            return BadRequest($"Çok fazla giriş yapmaya çalıştınız.{user.BanEndTime.ToLongDateString()}-{user.BanEndTime.ToLongTimeString()}'e kadar giriş yapamazsınız");
+                        }
+                        user.BanCount += 1;
+                        await _appUserService.UpdateAsync(user);
+                        return BadRequest("Kullanıcı adı veya şifre hatalıdır.");
+                    }
+                }
             }
             return BadRequest("Kullanıcı adı veya şifre hatalıdır.");
         }

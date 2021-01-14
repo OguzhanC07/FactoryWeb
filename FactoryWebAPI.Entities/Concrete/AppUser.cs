@@ -13,6 +13,8 @@ namespace FactoryWebAPI.Entities.Concrete
         public string Email { get; set; }
         public string FullName { get; set; }
         public string ImagePath { get; set; }
+        public int BanCount { get; set; }
+        public DateTime BanEndTime { get; set; } = DateTime.Now;
 
 
         public List<Dealer> Dealers { get; set; }
