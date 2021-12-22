@@ -1,23 +1,18 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using FactoryWebAPI.Business.Containers.MicrosoftIoC;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using AutoMapper;
 using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
-using FactoryWebAPI.Business.StringInfo.cs;
 using System.Text;
 using FactoryWebAPI.Business.Interfaces;
 using FactoryWebAPI.Business.Settings;
+using FactoryWebAPI.Business.StringInfo;
 
 namespace FactoryWebAPI.WebApi
 {

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using FactoryWebAPI.Business.Interfaces;
-using FactoryWebAPI.Business.StringInfo.cs;
+using FactoryWebAPI.Business.StringInfo;
 using FactoryWebAPI.DTO.DTOs.AppUserDtos;
 using FactoryWebAPI.DTO.DTOs.ForgotPasswordDtos;
 using FactoryWebAPI.Entities.Concrete;

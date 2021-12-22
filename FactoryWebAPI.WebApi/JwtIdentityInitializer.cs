@@ -1,10 +1,6 @@
 ﻿using FactoryWebAPI.Business.Interfaces;
-using FactoryWebAPI.Business.StringInfo.cs;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Cryptography;
 using System.Threading.Tasks;
+using FactoryWebAPI.Business.StringInfo;
 
 namespace FactoryWebAPI.WebApi
 {
@@ -31,25 +27,16 @@ namespace FactoryWebAPI.WebApi
             }
 
             var adminUser = await appUserService.FindByEmailorUserName("oguzhancan2009@gmail.com");
-            var adminUser1 = await appUserService.FindByEmailorUserName("onurgoz98@gmail.com");
-            if (adminUser == null && adminUser1 == null)
+            if (adminUser == null)
             {
                 string password =appUserService.CreateHashPassword("1");
 
                 await appUserService.AddAsync(new Entities.Concrete.AppUser
                 {
-                    FullName = "Oğuzhan",
+                    FullName = "oguzhan",
                     UserName = "admin",
                     Password = password,
                     Email = "oguzhancan2009@gmail.com",
-                    ImagePath = "default.jpg"
-                });
-                await appUserService.AddAsync(new Entities.Concrete.AppUser
-                {
-                    FullName = "Onur",
-                    UserName = "admincik",
-                    Password = password,
-                    Email = "onurgoz98@gmail.com",
                     ImagePath = "default.jpg"
                 });
 
@@ -60,12 +47,6 @@ namespace FactoryWebAPI.WebApi
                 await appUserRoleService.AddAsync(new Entities.Concrete.AppUserRole
                 {
                     AppUserId = admin.Id,
-                    AppRoleId = role.Id
-                });
-
-                await appUserRoleService.AddAsync(new Entities.Concrete.AppUserRole
-                {
-                    AppUserId = admin1.Id,
                     AppRoleId = role.Id
                 });
             }

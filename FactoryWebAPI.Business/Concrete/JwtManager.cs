@@ -1,6 +1,5 @@
 ﻿using FactoryWebAPI.Business.Interfaces;
 using FactoryWebAPI.Business.Settings;
-using FactoryWebAPI.Business.StringInfo.cs;
 using FactoryWebAPI.Entities.Concrete;
 using Microsoft.IdentityModel.Tokens;
 using System;
@@ -8,6 +7,7 @@ using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
+using FactoryWebAPI.Business.StringInfo;
 
 namespace FactoryWebAPI.Business.Concrete
 {

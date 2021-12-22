@@ -9,9 +9,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FactoryWebAPI.DataAccess", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FactoryWebAPI.Business", "FactoryWebAPI.Business\FactoryWebAPI.Business.csproj", "{6C089DDB-3FD9-49DD-8EF0-F9238EEE1F01}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FactoryWebAPI.WebApi", "FactoryWebAPI.WebApi\FactoryWebAPI.WebApi.csproj", "{560212B8-51AB-401D-9E82-71D6099D122D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FactoryWebAPI.WebApi", "FactoryWebAPI.WebApi\FactoryWebAPI.WebApi.csproj", "{560212B8-51AB-401D-9E82-71D6099D122D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FactoryWebAPI.DTO", "FactoryWebAPI.DTO\FactoryWebAPI.DTO.csproj", "{FB759C14-AC7B-4C1F-B3E5-0281B4D7064F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FactoryWebAPI.DTO", "FactoryWebAPI.DTO\FactoryWebAPI.DTO.csproj", "{FB759C14-AC7B-4C1F-B3E5-0281B4D7064F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FactoryWebAPI.Client", "FactoryWebAPI.Client\FactoryWebAPI.Client.csproj", "{7E86748E-201D-4E8B-9A70-922B73235302}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,10 @@ Global
 		{FB759C14-AC7B-4C1F-B3E5-0281B4D7064F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FB759C14-AC7B-4C1F-B3E5-0281B4D7064F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FB759C14-AC7B-4C1F-B3E5-0281B4D7064F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7E86748E-201D-4E8B-9A70-922B73235302}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7E86748E-201D-4E8B-9A70-922B73235302}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7E86748E-201D-4E8B-9A70-922B73235302}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7E86748E-201D-4E8B-9A70-922B73235302}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
