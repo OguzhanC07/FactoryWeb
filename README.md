@@ -25,7 +25,4 @@ password : 1
 ```
 
 ## Screenshots
-![login](https://user-images.githubusercontent.com/59476485/147150403-c0e3c898-1d0f-4224-927c-5187b0c27071.png)
-
-
-
+![Photos](https://user-images.githubusercontent.com/59476485/147153746-549a0d71-267e-43f5-99df-b32d8d5db5f2.jpg)
