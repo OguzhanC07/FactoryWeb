@@ -26,23 +26,22 @@ namespace FactoryWebAPI.WebApi
                 });
             }
 
-            var adminUser = await appUserService.FindByEmailorUserName("oguzhancan2009@gmail.com");
+            var adminUser = await appUserService.FindByEmailorUserName("admin@gmail.com");
             if (adminUser == null)
             {
                 string password =appUserService.CreateHashPassword("1");
 
                 await appUserService.AddAsync(new Entities.Concrete.AppUser
                 {
-                    FullName = "oguzhan",
+                    FullName = "admin",
                     UserName = "admin",
                     Password = password,
-                    Email = "oguzhancan2009@gmail.com",
+                    Email = "admin@gmail.com",
                     ImagePath = "default.jpg"
                 });
 
                 var role = await appRoleService.FindByNameAsync(RoleInfo.Admin);
                 var admin = await appUserService.FindByEmailorUserName("admin");
-                var admin1 = await appUserService.FindByEmailorUserName("admincik");
 
                 await appUserRoleService.AddAsync(new Entities.Concrete.AppUserRole
                 {
