@@ -46,9 +46,9 @@ namespace FactoryWebAPI.WebApi.Controllers
                     {
                         var newName = Guid.NewGuid() + Path.GetExtension(file.FileName);
                         var path = Path.Combine(Directory.GetCurrentDirectory(), $"wwwroot/{folder}/" + newName);
-                        var stream = new FileStream(path, FileMode.Create);
+                        await using var stream = new FileStream(path, FileMode.Create);
                         await file.CopyToAsync(stream);
-
+                       
                         uploadModel.NewName = newName;
                         uploadModel.UploadState = UploadState.Success;
                         return uploadModel;
